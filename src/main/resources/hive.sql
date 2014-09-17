@@ -1,0 +1,3 @@
+CREATE TABLE clickstream_log_new(user_id string,cookie_id string,session_id string,user_location string,ip_address string,os_version string,os_type string,product_name string,product_version string,user_agent string, explorer_version string,sp_type string,network_type string,visit_time bigint,leave_time bigint,event_type string,event_name string,visit_from string,visit_resouce string,device_type string,device_id string,display_solution string,parent_id string,current_id string) PARTITIONED BY (dt string) ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' LINES TERMINATED BY '\n';
+LOAD DATA LOCAL INPATH '/tmp/clickstream_log.txt' INTO TABLE clickstream_log;
+load data local inpath '/tmp/clickstream_log.txt' into table clickstream_log PARTITION (dt='20140908');

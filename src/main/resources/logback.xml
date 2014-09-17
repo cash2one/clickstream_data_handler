@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+
+<configuration debug="true">
+
+	<property name="LOG_HOME" value="/data/usereventlog/clickstream_log" />
+	
+	<property name="LOG_PATTERN" value="%d{yyy-MM-dd HH:mm:ss.SSS} [%thread] [%-5level] %logger{36} [%method:%line] - %msg%n" />
+	
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>${LOG_PATTERN}</pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="base_appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_HOME}/base.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/base.%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>64MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>${LOG_PATTERN}</pattern>
+		</layout>
+	</appender>
+	
+	<appender name="exportData" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_HOME}/writer.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/writer.%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>1024MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>${LOG_PATTERN}</pattern>
+		</layout>
+	</appender>
+	
+	<logger name="com.to8to.exportData" level="error" additivity="true">
+		<appender-ref ref="exportData" />
+	</logger>
+	
+	<root level="error">
+		<appender-ref ref="base_appender" />
+		<appender-ref ref="STDOUT" />
+	</root>
+	
+</configuration>
