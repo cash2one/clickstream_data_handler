@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -182,6 +183,8 @@ public class ExportData
                                 if (ue.getEt().equals("1"))
                                 {
                                     parent_id = ue.getCi();
+                                    parent_id = parent_id+"-"+cookie_id+"-"+session_id;
+                                    parent_id = DigestUtils.md5Hex(parent_id); 
                                 }
                             }
                             for (int i = 0; i < size; i++)
@@ -219,6 +222,15 @@ public class ExportData
                                         logbean.setEvent_name(ue.getEn());
                                         logbean.setVisit_resouce(decodeURL(ue
                                                 .getVr()));
+                                        
+                                        String current_id = "";
+                                        if(!StringUtil.isEmpty(ue.getCi()))
+                                        {
+                                            current_id = ue.getCi();
+                                        }
+                                        current_id = current_id+"-"+cookie_id+"-"+session_id;
+                                        current_id = DigestUtils.md5Hex(current_id);
+                                        
                                         logbean.setCurrent_id(ue.getCi());
                                         logbean.setParent_id(parent_id);
                                         writer.write(logbean.toString() + "\n");
