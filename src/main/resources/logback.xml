@@ -46,6 +46,7 @@
 	
 	<root level="debug">
 		<appender-ref ref="base_appender" />
+		<appender-ref ref="STDOUT"/>
 	</root>
 	
 </configuration>
