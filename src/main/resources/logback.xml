@@ -40,13 +40,12 @@
 		</layout>
 	</appender>
 	
-	<logger name="com.to8to.exportData" level="error" additivity="true">
+	<logger name="com.to8to.exportData" level="debug" additivity="true">
 		<appender-ref ref="exportData" />
 	</logger>
 	
-	<root level="error">
+	<root level="debug">
 		<appender-ref ref="base_appender" />
-		<appender-ref ref="STDOUT" />
 	</root>
 	
 </configuration>
