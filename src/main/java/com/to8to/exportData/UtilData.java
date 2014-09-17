@@ -1,8 +1,25 @@
 package com.to8to.exportData;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URI;
+import java.util.Calendar;
+
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileSystem;
+import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.IOUtils;
+import org.apache.hadoop.util.Progressable;
+
+import com.to8to.commons.utils.Config;
+
 public class UtilData
 {
-    /*    public static void getTime2()
+    public static void getTime()
     {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, 2014);
@@ -21,9 +38,9 @@ public class UtilData
         cal.set(Calendar.MINUTE, 0);
         cal.set(Calendar.MILLISECOND, 0);
         System.out.println(cal.getTimeInMillis());
-    }*/
-    
-    /*   public static void upLoad2HDFS() throws FileNotFoundException, IOException
+    }
+
+    public static void upLoad2HDFS() throws FileNotFoundException, IOException
     {
         Config config = new Config("hdfs.properties");
         String LOCAL_SRC = config.get("LOCAL_SRC");
@@ -44,5 +61,10 @@ public class UtilData
             }
         });
         IOUtils.copyBytes(in, out, 1024, true);
-    }*/
+    }
+    
+    public static void main(String[] args)
+    {
+        getTime();
+    }
 }

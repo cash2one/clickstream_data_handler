@@ -357,7 +357,7 @@ public class ExportData
 
     public static void main(String[] args)
     {
-/*        try
+        try
         {
             Config config = new Config("hdfs.properties");
             Calendar calendar = Calendar.getInstance();// 此时打印它获取的是系统当前时间
@@ -378,17 +378,7 @@ public class ExportData
         catch (Exception e)
         {
             logger.error(e.getMessage(), e);
-        }*/
-        try
-        {
-            String url = "http://nc.to8to.com/company/?utm_source=sogou&utm_medium=cpc&utm_keyword=1184102226&utm_term=%e5%8d%97%e6%98%8c%e8%a3%85%e4%bf%ae%e5%85%ac%e5%8f%b8%e6%8e%92%e5%90%8d&utm_content=04+%e8%a3%85%e4%bf%ae%e5%85%ac%e5%8f%b8%e6%8e%92%e5%90%8d%ef%bc%88%e7%b2%be%ef%bc%89&utm_campaign=%e5%8d%97%e6%98%8c&utm_content=04+%e8%a3%85%e4%bf%ae%e5%85%ac%e5%8f%b8%e6%8e%92%e5%90%8d%ef%bc%88%e7%b2%be%ef%bc%89&utm_content=04+%e8%a3%85%e4%bf%ae%e5%85%ac%e5%8f%b8%e6%8e%92%e5%90%8d%ef%bc%88%e7%b2%be%ef%bc%89&utm_content=04+%e8%a3%85%e4%bf%ae%e5%85%ac%e5%8f%b8%e6%8e%92%e5%90%8d%ef%bc%88%e7%b2%be%ef%bc%89&utm_content=04+%e8%a3%85%e4%bf%ae%e5%85%ac%e5%8f%b8%e6%8e%92%e5%90%8d%ef%bc%88%e7%b2%be%ef%&location=1#show_company";
-            
         }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-        
     }
 
 }
