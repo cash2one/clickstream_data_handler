@@ -222,16 +222,23 @@ public class ExportData
                                         logbean.setEvent_name(ue.getEn());
                                         logbean.setVisit_resouce(decodeURL(ue
                                                 .getVr()));
-                                        
-                                        String current_id = "";
-                                        if(!StringUtil.isEmpty(ue.getCi()))
+                                        if(ue.getEt().equals("1"))
                                         {
-                                            current_id = ue.getCi();
+                                            logbean.setCurrent_id(parent_id);
+                                            logbean.setParent_id(parent_id);
                                         }
-                                        current_id = current_id+"-"+cookie_id+"-"+session_id+System.currentTimeMillis();
-                                        current_id = DigestUtils.md5Hex(current_id);
-                                        logbean.setCurrent_id(current_id);
-                                        logbean.setParent_id(parent_id);
+                                        else
+                                        {
+                                            String current_id = "";
+                                            if(!StringUtil.isEmpty(ue.getCi()))
+                                            {
+                                                current_id = ue.getCi();
+                                            }
+                                            current_id = current_id+"-"+cookie_id+"-"+session_id+System.currentTimeMillis();
+                                            current_id = DigestUtils.md5Hex(current_id);
+                                            logbean.setCurrent_id(current_id);
+                                            logbean.setParent_id(parent_id);
+                                        }
                                         writer.write(logbean.toString() + "\n");
                                         writer.flush();
                                     }
