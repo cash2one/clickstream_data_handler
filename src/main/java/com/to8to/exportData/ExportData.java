@@ -230,8 +230,7 @@ public class ExportData
                                         }
                                         current_id = current_id+"-"+cookie_id+"-"+session_id;
                                         current_id = DigestUtils.md5Hex(current_id);
-                                        
-                                        logbean.setCurrent_id(ue.getCi());
+                                        logbean.setCurrent_id(current_id);
                                         logbean.setParent_id(parent_id);
                                         writer.write(logbean.toString() + "\n");
                                         writer.flush();
@@ -319,6 +318,11 @@ public class ExportData
                         stirngurl = (java.net.URLDecoder.decode(stirngurl,
                                 "gbk"));
                     }
+                    else if(stirngurl.indexOf("cpro.baidu.com")!=-1)
+                    {
+                        stirngurl = (java.net.URLDecoder.decode(stirngurl,
+                                "gbk"));
+                    }
                     else if (stirngurl.indexOf("image.so") != -1
                             || stirngurl.indexOf("so.com") != -1
                             || stirngurl.indexOf("baidu.com") != -1
@@ -369,6 +373,7 @@ public class ExportData
 
     public static void main(String[] args)
     {
+        
         try
         {
             Config config = new Config("hdfs.properties");

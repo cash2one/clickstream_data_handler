@@ -98,7 +98,7 @@
 				<executions>
 					<execution>
 						<id>copy</id>
-						<phase>package</phase>
+						<phase>install</phase>
 						<goals>
 							<goal>copy-dependencies</goal>
 						</goals>
@@ -106,6 +106,9 @@
 							<outputDirectory>
 								${project.build.directory}/lib
 							</outputDirectory>
+							<overWriteReleases>false</overWriteReleases>
+							<overWriteSnapshots>false</overWriteSnapshots>
+							<overWriteIfNewer>true</overWriteIfNewer>
 						</configuration>
 					</execution>
 				</executions>
@@ -162,7 +165,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
 		</plugins>
 	</build>
 
