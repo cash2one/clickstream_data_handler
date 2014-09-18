@@ -183,7 +183,7 @@ public class ExportData
                                 if (ue.getEt().equals("1"))
                                 {
                                     parent_id = ue.getCi();
-                                    parent_id = parent_id+"-"+cookie_id+"-"+session_id;
+                                    parent_id = parent_id+"-"+cookie_id+"-"+session_id+System.currentTimeMillis();
                                     parent_id = DigestUtils.md5Hex(parent_id); 
                                 }
                             }
@@ -228,7 +228,7 @@ public class ExportData
                                         {
                                             current_id = ue.getCi();
                                         }
-                                        current_id = current_id+"-"+cookie_id+"-"+session_id;
+                                        current_id = current_id+"-"+cookie_id+"-"+session_id+System.currentTimeMillis();
                                         current_id = DigestUtils.md5Hex(current_id);
                                         logbean.setCurrent_id(current_id);
                                         logbean.setParent_id(parent_id);
@@ -263,6 +263,8 @@ public class ExportData
                             logbean.setDevice_type(device_type);
                             logbean.setDevice_id(device_id);
                             logbean.setDisplay_solution(display_solution);
+                            parent_id = parent_id+"-"+cookie_id+"-"+session_id+System.currentTimeMillis();
+                            parent_id = DigestUtils.md5Hex(parent_id); 
                             logbean.setParent_id(parent_id);
                             writer.write(logbean.toString() + "\n");
                             writer.flush();
