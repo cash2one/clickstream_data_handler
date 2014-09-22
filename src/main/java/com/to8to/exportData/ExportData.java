@@ -386,22 +386,38 @@ public class ExportData
         try
         {
             
-            Calendar calendar = Calendar.getInstance();// 此时打印它获取的是系统当前时间
-            calendar.add(Calendar.DATE, -1); // 得到前一天
-            String yestedayDate = new SimpleDateFormat("yyyy-MM-dd")
-                    .format(calendar.getTime());
-            String yestedayDate2 = new SimpleDateFormat("yyyyMMdd")
-                    .format(calendar.getTime());
-            logger.debug("yestedayDate2: " + yestedayDate2);
-            String fileName = "UserEventLog" + yestedayDate + ".json";
-            logger.debug("filename: " + fileName);
+            String fileName = "";
+            String yestedayDate2 = "";
+            String yestedayDate = "";
             
+            if(args.length==0)
+            {
+                Calendar calendar = Calendar.getInstance();// 此时打印它获取的是系统当前时间
+                calendar.add(Calendar.DATE, -1); // 得到前一天
+                yestedayDate = new SimpleDateFormat("yyyy-MM-dd")
+                        .format(calendar.getTime());
+                yestedayDate2 = new SimpleDateFormat("yyyyMMdd")
+                        .format(calendar.getTime());
+                logger.debug("yestedayDate2: " + yestedayDate2);
+                fileName = "UserEventLog" + yestedayDate + ".json";
+                logger.debug("filename: " + fileName);
+            }
+            else if(args.length==2)
+            {
+                yestedayDate = args[0];
+                yestedayDate2 = args[1];
+                logger.debug("else yestedayDate2: " + yestedayDate2);
+                fileName = "UserEventLog" + yestedayDate + ".json";
+                logger.debug("else filename: " + fileName);
+            }
+
             Config config = new Config("hdfs.properties");
             String sourcePath = config.get("LOCAL_SRC_JSON") + fileName;
             String destPath = config.get("LOCAL_SRC");
             logger.debug("sourcePath: " + sourcePath + "destPath: " + destPath);
             changeFile(sourcePath, destPath);
             file2Hive(yestedayDate2);
+            
             
         }
         catch (Exception e)
