@@ -158,6 +158,7 @@ public class Escape
 
     public static void main(String[] args) throws UnsupportedEncodingException
     {
+        
 /*        String url = "http://nc.to8to.com/company/?utm_source=sogou&utm_medium=cpc&utm_keyword=1184102226&utm_term=%e5%8d%97%e6%98%8c%e8%a3%85%e4%bf%ae%e5%85%ac%e5%8f%b8%e6%8e%92%e5%90%8d&utm_content=04+%e8%a3%85%e4%bf%ae%e5%85%ac%e5%8f%b8%e6%8e%92%e5%90%8d%ef%bc%88%e7%b2%be%ef%bc%89&utm_campaign=%e5%8d%97%e6%98%8c&utm_content=04+%e8%a3%85%e4%bf%ae%e5%85%ac%e5%8f%b8%e6%8e%92%e5%90%8d%ef%bc%88%e7%b2%be%ef%bc%89&utm_content=04+%e8%a3%85%e4%bf%ae%e5%85%ac%e5%8f%b8%e6%8e%92%e5%90%8d%ef%bc%88%e7%b2%be%ef%bc%89&utm_content=04+%e8%a3%85%e4%bf%ae%e5%85%ac%e5%8f%b8%e6%8e%92%e5%90%8d%ef%bc%88%e7%b2%be%ef%bc%89&utm_content=04+%e8%a3%85%e4%bf%ae%e5%85%ac%e5%8f%b8%e6%8e%92%e5%90%8d%ef%bc%88%e7%b2%be%ef%&location=1#show_company";
         String s = new String(url.getBytes("ISO8859-1"), "UTF-8");
         System.out.println(url);*/
@@ -168,8 +169,9 @@ public class Escape
      System.out.println(stest);
      System.out.println(escape(stest));
      System.out.println(unescape(escape(stest)));*/
-     
+/*     
         String proFilePath = System.getProperty("user.dir") + "\\filename.properties";
-        System.out.println(proFilePath);
+        System.out.println(proFilePath);*/
+        
     }
 }
