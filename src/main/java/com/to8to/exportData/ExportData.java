@@ -30,42 +30,6 @@ public class ExportData
 
     public static Logger logger = LoggerFactory.getLogger(ExportData.class);
 
-    public static String stringToLongTime(String time)
-    {
-        if (!StringUtil.isEmpty(time))
-        {
-            String[] args = time.split("\\.");
-            Calendar cal = Calendar.getInstance();
-
-            logger.debug("args[0].length(): " + args[0].length() + " args[0]:"
-                    + args[0]);
-
-            if (args[0].length() == 14)
-            {
-                int miliseconde = 0;
-                if (args.length > 2)
-                {
-                    miliseconde = Integer.parseInt(args[1]);
-                }
-                int year = Integer.parseInt(time.substring(0, 4));
-                int month = Integer.parseInt(time.substring(4, 6)) - 1;
-                int day = Integer.parseInt(time.substring(6, 8));
-                int hour = Integer.parseInt(time.substring(8, 10));
-                int miniute = Integer.parseInt(time.substring(10, 12));
-                int sencode = Integer.parseInt(time.substring(12, 14));
-                cal.set(Calendar.YEAR, year);
-                cal.set(Calendar.MONTH, month);
-                cal.set(Calendar.DATE, day);
-                cal.set(Calendar.HOUR_OF_DAY, hour);
-                cal.set(Calendar.SECOND, sencode);
-                cal.set(Calendar.MINUTE, miniute);
-                cal.set(Calendar.MILLISECOND, miliseconde);
-                return String.valueOf(cal.getTimeInMillis());
-            }
-        }
-        return "0";
-    }
-
     public static void changeFile(String source, String dest)
     {
 
@@ -153,7 +117,7 @@ public class ExportData
 
                         String visit_from = null;
                         if (!StringUtil.isEmpty(putLogReq.getVf()))
-                            visit_from = decodeURL(putLogReq.getVf());
+                            visit_from = putLogReq.getVf();
 
                         String device_type = null;
                         if (!StringUtil.isEmpty(putLogReq.getDt()))
@@ -169,7 +133,7 @@ public class ExportData
 
                         String leave_time = null;
                         if (!StringUtil.isEmpty(putLogReq.getLt()))
-                            leave_time = stringToLongTime(putLogReq.getLt());
+                            leave_time = putLogReq.getLt();
 
                         List<UserEvent> e = putLogReq.getE();
                         int size = e.size();
@@ -183,8 +147,10 @@ public class ExportData
                                 if (ue.getEt().equals("1"))
                                 {
                                     parent_id = ue.getCi();
-                                    parent_id = parent_id+"-"+cookie_id+"-"+session_id+System.currentTimeMillis();
-                                    parent_id = DigestUtils.md5Hex(parent_id); 
+                                    parent_id = parent_id + "-" + cookie_id
+                                            + "-" + session_id
+                                            + System.currentTimeMillis();
+                                    parent_id = DigestUtils.md5Hex(parent_id);
                                 }
                             }
                             for (int i = 0; i < size; i++)
@@ -195,53 +161,49 @@ public class ExportData
                                     UserEvent ue = e.get(i);
                                     LogBean logbean = new LogBean();
                                     logbean.setLeave_time(leave_time);
-                                    String visit_time = stringToLongTime(ue
-                                            .getVt());
+                                    String visit_time = ue.getVt();
                                     logbean.setVisit_time(visit_time);
-
-                                    if (Long.parseLong(leave_time) > Long
-                                            .parseLong(visit_time))
+                                    logbean.setUser_id(user_id);
+                                    logbean.setCookie_id(cookie_id);
+                                    logbean.setSession_id(session_id);
+                                    logbean.setUser_location(user_location);
+                                    logbean.setIp_address(ip_adress);
+                                    logbean.setOs_version(os_version);
+                                    logbean.setOs_type(os_type);
+                                    logbean.setProduct_name(productName);
+                                    logbean.setProduct_version(product_version);
+                                    logbean.setUser_agent(user_agent);
+                                    logbean.setSp_type(sp_type);
+                                    logbean.setNetwork_type(network_type);
+                                    logbean.setVisit_from(visit_from);
+                                    logbean.setDevice_type(device_type);
+                                    logbean.setDevice_id(device_id);
+                                    logbean.setDisplay_solution(display_solution);
+                                    logbean.setEvent_type(ue.getEt());
+                                    logbean.setEvent_name(ue.getEn());
+                                    logbean.setVisit_resouce(ue.getVr());
+                                    if (ue.getEt().equals("1"))
                                     {
-                                        logbean.setUser_id(user_id);
-                                        logbean.setCookie_id(cookie_id);
-                                        logbean.setSession_id(session_id);
-                                        logbean.setUser_location(user_location);
-                                        logbean.setIp_address(ip_adress);
-                                        logbean.setOs_version(os_version);
-                                        logbean.setOs_type(os_type);
-                                        logbean.setProduct_name(productName);
-                                        logbean.setProduct_version(product_version);
-                                        logbean.setUser_agent(user_agent);
-                                        logbean.setSp_type(sp_type);
-                                        logbean.setNetwork_type(network_type);
-                                        logbean.setVisit_from(visit_from);
-                                        logbean.setDevice_type(device_type);
-                                        logbean.setDevice_id(device_id);
-                                        logbean.setDisplay_solution(display_solution);
-                                        logbean.setEvent_type(ue.getEt());
-                                        logbean.setEvent_name(ue.getEn());
-                                        logbean.setVisit_resouce(decodeURL(ue
-                                                .getVr()));
-                                        if(ue.getEt().equals("1"))
-                                        {
-                                            logbean.setCurrent_id(parent_id);
-                                            logbean.setParent_id(parent_id);
-                                        }
-                                        else
-                                        {
-                                            String current_id = "";
-                                            if(!StringUtil.isEmpty(ue.getCi()))
-                                            {
-                                                current_id = ue.getCi();
-                                            }
-                                            current_id = current_id+"-"+cookie_id+"-"+session_id+System.currentTimeMillis();
-                                            current_id = DigestUtils.md5Hex(current_id);
-                                            logbean.setCurrent_id(current_id);
-                                            logbean.setParent_id(parent_id);
-                                        }
-                                        writer.write(logbean.toString() + "\n");
-                                        writer.flush();
+                                        logbean.setCurrent_id(parent_id);
+                                        logbean.setParent_id(parent_id);
                                     }
+                                    else
+                                    {
+                                        String current_id = "";
+                                        if (!StringUtil.isEmpty(ue.getCi()))
+                                        {
+                                            current_id = ue.getCi();
+                                        }
+                                        current_id = current_id + "-"
+                                                + cookie_id + "-" + session_id
+                                                + System.currentTimeMillis();
+                                        current_id = DigestUtils
+                                                .md5Hex(current_id);
+                                        logbean.setCurrent_id(current_id);
+                                        logbean.setParent_id(parent_id);
+                                    }
+                                    writer.write(logbean.toString() + "\n");
+                                    writer.flush();
                                 }
                                 catch (Exception es)
                                 {
@@ -270,8 +232,9 @@ public class ExportData
                             logbean.setDevice_type(device_type);
                             logbean.setDevice_id(device_id);
                             logbean.setDisplay_solution(display_solution);
-                            parent_id = parent_id+"-"+cookie_id+"-"+session_id+System.currentTimeMillis();
-                            parent_id = DigestUtils.md5Hex(parent_id); 
+                            parent_id = parent_id + "-" + cookie_id + "-"
+                                    + session_id + System.currentTimeMillis();
+                            parent_id = DigestUtils.md5Hex(parent_id);
                             logbean.setParent_id(parent_id);
                             writer.write(logbean.toString() + "\n");
                             writer.flush();
@@ -300,71 +263,6 @@ public class ExportData
         }
     }
 
-    public static String decodeURL(String url)
-    {
-        String stirngurl = url;
-        if (!StringUtil.isEmpty(url))
-        {
-            stirngurl = ("http://" + url).toLowerCase();
-            try
-            {
-                if (url.indexOf("utf-8") != -1 || url.indexOf("utf8") != -1)
-                {
-                    stirngurl = URLDecoder.decode(stirngurl, "utf-8");
-                }
-                else if (url.indexOf("gb2312") != -1)
-                {
-                    stirngurl = URLDecoder.decode(stirngurl, "gb2312");
-                }
-                else if (url.indexOf("gbk") != -1)
-                {
-                    stirngurl = URLDecoder.decode(stirngurl, "gbk");
-                }
-                else
-                {
-                    if (stirngurl.indexOf("www.sogou.com") != -1)
-                    {
-                        stirngurl = (java.net.URLDecoder.decode(stirngurl,
-                                "gbk"));
-                    }
-                    else if(stirngurl.indexOf("cpro.baidu.com")!=-1)
-                    {
-                        stirngurl = (java.net.URLDecoder.decode(stirngurl,
-                                "gbk"));
-                    }
-                    else if (stirngurl.indexOf("image.so") != -1
-                            || stirngurl.indexOf("so.com") != -1
-                            || stirngurl.indexOf("baidu.com") != -1
-                            || stirngurl.indexOf("to8to.com") != -1)
-                    {
-                        stirngurl = (java.net.URLDecoder.decode(stirngurl,
-                                "utf-8"));
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-                logger.error(e.getMessage(), e);
-                logger.error("decode url is: "+stirngurl);
-                return stirngurl;
-            }
-            return stirngurl;
-        }
-        return stirngurl;
-    }
-
-    public static long getStartTime()
-    {
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.HOUR_OF_DAY, 0);
-        cal.set(Calendar.SECOND, 0);
-        cal.set(Calendar.MINUTE, 0);
-        cal.set(Calendar.MILLISECOND, 0);
-        logger.debug("cal.getTime: " + cal.getTime());
-        return cal.getTimeInMillis();
-    }
-
     public static void file2Hive(String yesterday) throws Exception
     {
         Config config = new Config("hive.properties");
@@ -382,15 +280,15 @@ public class ExportData
 
     public static void main(String[] args)
     {
-        
+
         try
         {
-            
+
             String fileName = "";
             String yestedayDate2 = "";
             String yestedayDate = "";
-            
-            if(args.length==0)
+
+            if (args.length == 0)
             {
                 Calendar calendar = Calendar.getInstance();// 此时打印它获取的是系统当前时间
                 calendar.add(Calendar.DATE, -1); // 得到前一天
@@ -402,7 +300,7 @@ public class ExportData
                 fileName = "UserEventLog" + yestedayDate + ".json";
                 logger.debug("filename: " + fileName);
             }
-            else if(args.length==2)
+            else if (args.length == 2)
             {
                 yestedayDate = args[0];
                 yestedayDate2 = args[1];
@@ -417,8 +315,7 @@ public class ExportData
             logger.debug("sourcePath: " + sourcePath + "destPath: " + destPath);
             changeFile(sourcePath, destPath);
             file2Hive(yestedayDate2);
-            
-            
+
         }
         catch (Exception e)
         {
