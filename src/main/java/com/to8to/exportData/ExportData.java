@@ -8,7 +8,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
@@ -28,13 +27,12 @@ import com.to8to.commons.utils.StringUtil;
 public class ExportData
 {
 
+    public static int count = 0;
     public static Logger logger = LoggerFactory.getLogger(ExportData.class);
 
     public static void changeFile(String source, String dest)
     {
-
         File file = new File(source);
-
         try
         {
             InputStreamReader read = new InputStreamReader(new FileInputStream(
@@ -52,8 +50,7 @@ public class ExportData
                     logger.debug(line);
 
                     Gson gson = new Gson();
-                    PutLogReq putLogReq = null;
-
+                    PutLogReq putLogReq = null; 
                     try
                     {
                         putLogReq = gson.fromJson(line, PutLogReq.class);
@@ -204,6 +201,9 @@ public class ExportData
                                     }
                                     writer.write(logbean.toString() + "\n");
                                     writer.flush();
+                                    count++;
+                                    logger.info("=====================================write a message: "+logbean.toString());
+                                    logger.info("=============================================count: "+count);
                                 }
                                 catch (Exception es)
                                 {
@@ -238,6 +238,8 @@ public class ExportData
                             logbean.setParent_id(parent_id);
                             writer.write(logbean.toString() + "\n");
                             writer.flush();
+                            logger.info("=====================================write a message: "+logbean.toString());
+                            logger.info("=============================================count: "+count);
                         }
                     }
                 }
@@ -265,6 +267,7 @@ public class ExportData
 
     public static void file2Hive(String yesterday) throws Exception
     {
+        logger.info("===================begin file2hive=========================");
         Config config = new Config("hive.properties");
         String hive_jdbc_url = config.get("hive_jdbc_url");
         String driver_name = config.get("driver_name");
@@ -273,9 +276,10 @@ public class ExportData
         Statement stmt = conn.createStatement();
         String filepath = config.get("file_path");
         String sql = "load data local inpath '" + filepath
-                + "' overwrite into table clickstream_log_new PARTITION (dt="
+                + "' overwrite into table clickstream PARTITION (dt="
                 + yesterday + ")";
         stmt.execute(sql);
+        logger.info("===================end file2hive=========================");
     }
 
     public static void main(String[] args)
@@ -283,7 +287,7 @@ public class ExportData
 
         try
         {
-
+            logger.info("=============================begin=============================");
             String fileName = "";
             String yestedayDate2 = "";
             String yestedayDate = "";
@@ -308,14 +312,13 @@ public class ExportData
                 fileName = "UserEventLog" + yestedayDate + ".json";
                 logger.debug("else filename: " + fileName);
             }
-
             Config config = new Config("hdfs.properties");
             String sourcePath = config.get("LOCAL_SRC_JSON") + fileName;
             String destPath = config.get("LOCAL_SRC");
             logger.debug("sourcePath: " + sourcePath + "destPath: " + destPath);
             changeFile(sourcePath, destPath);
             file2Hive(yestedayDate2);
-
+            logger.info("========================over=============================");
         }
         catch (Exception e)
         {
