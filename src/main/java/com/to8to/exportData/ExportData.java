@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
@@ -115,7 +116,11 @@ public class ExportData
                         String visit_from = null;
                         if (!StringUtil.isEmpty(putLogReq.getVf()))
                             visit_from = putLogReq.getVf();
-
+                        
+/*                        String visit_from = null;
+                        if (!StringUtil.isEmpty(putLogReq.getVf()))
+                            visit_from = decodeURL(putLogReq.getVf());
+*/
                         String device_type = null;
                         if (!StringUtil.isEmpty(putLogReq.getDt()))
                             device_type = putLogReq.getDt();
@@ -179,6 +184,9 @@ public class ExportData
                                     logbean.setEvent_type(ue.getEt());
                                     logbean.setEvent_name(ue.getEn());
                                     logbean.setVisit_resouce(ue.getVr());
+                                    
+                                    /*logbean.setVisit_resouce(decodeURL(ue.getVr()));*/
+                                    
                                     if (ue.getEt().equals("1"))
                                     {
                                         logbean.setCurrent_id(parent_id);
@@ -281,6 +289,61 @@ public class ExportData
         stmt.execute(sql);
         logger.info("===================end file2hive=========================");
     }
+    
+    public static String decodeURL(String url)
+    {
+        String stirngurl = url;
+        if (!StringUtil.isEmpty(url))
+        {
+            stirngurl = ("http://" + url).toLowerCase();
+            try
+            {
+                if (url.indexOf("utf-8") != -1 || url.indexOf("utf8") != -1)
+                {
+                    stirngurl = URLDecoder.decode(stirngurl, "utf-8");
+                }
+                else if (url.indexOf("gb2312") != -1)
+                {
+                    stirngurl = URLDecoder.decode(stirngurl, "gb2312");
+                }
+                else if (url.indexOf("gbk") != -1)
+                {
+                    stirngurl = URLDecoder.decode(stirngurl, "gbk");
+                }
+                else
+                {
+                    if (stirngurl.indexOf("www.sogou.com") != -1)
+                    {
+                        stirngurl = (java.net.URLDecoder.decode(stirngurl,
+                                "gbk"));
+                    }
+                    else if(stirngurl.indexOf("cpro.baidu.com")!=-1)
+                    {
+                        stirngurl = (java.net.URLDecoder.decode(stirngurl,
+                                "gbk"));
+                    }
+                    else if (stirngurl.indexOf("image.so") != -1
+                            || stirngurl.indexOf("so.com") != -1
+                            || stirngurl.indexOf("baidu.com") != -1
+                            || stirngurl.indexOf("to8to.com") != -1)
+                    {
+                        stirngurl = (java.net.URLDecoder.decode(stirngurl,
+                                "utf-8"));
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+                logger.error(e.getMessage(), e);
+                logger.error("decode url is: "+stirngurl);
+                return stirngurl;
+            }
+            return stirngurl;
+        }
+        return stirngurl;
+    }
+
 
     public static void main(String[] args)
     {
