@@ -113,14 +113,14 @@ public class ExportData
                         if (!StringUtil.isEmpty(putLogReq.getNt()))
                             network_type = putLogReq.getNt();
 
-                        String visit_from = null;
-                        if (!StringUtil.isEmpty(putLogReq.getVf()))
-                            visit_from = putLogReq.getVf();
-                        
 /*                        String visit_from = null;
                         if (!StringUtil.isEmpty(putLogReq.getVf()))
+                            visit_from = putLogReq.getVf();*/
+                        
+                        String visit_from = null;
+                        if (!StringUtil.isEmpty(putLogReq.getVf()))
                             visit_from = decodeURL(putLogReq.getVf());
-*/
+
                         String device_type = null;
                         if (!StringUtil.isEmpty(putLogReq.getDt()))
                             device_type = putLogReq.getDt();
@@ -183,9 +183,8 @@ public class ExportData
                                     logbean.setDisplay_solution(display_solution);
                                     logbean.setEvent_type(ue.getEt());
                                     logbean.setEvent_name(ue.getEn());
-                                    logbean.setVisit_resouce(ue.getVr());
-                                    
-                                    /*logbean.setVisit_resouce(decodeURL(ue.getVr()));*/
+                                    /*logbean.setVisit_resouce(ue.getVr());*/
+                                    logbean.setVisit_resouce(decodeURL(ue.getVr()));
                                     
                                     if (ue.getEt().equals("1"))
                                     {
