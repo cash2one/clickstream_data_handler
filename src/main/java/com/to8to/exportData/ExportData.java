@@ -14,6 +14,7 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
 
 import org.apache.commons.codec.digest.DigestUtils;
@@ -30,6 +31,8 @@ public class ExportData
 
     public static int count = 0;
     public static Logger logger = LoggerFactory.getLogger(ExportData.class);
+    public static HashSet<String> cookiedSet = new HashSet<String>(); 
+    public static int count2 = 0;
 
     public static void changeFile(String source, String dest)
     {
@@ -71,7 +74,15 @@ public class ExportData
 
                         String cookie_id = null;
                         if (!StringUtil.isEmpty(putLogReq.getCid()))
+                        {
                             cookie_id = putLogReq.getCid();
+                            cookiedSet.add(cookie_id);
+                        }
+                        else
+                        {
+                            cookie_id = System.currentTimeMillis()+"";
+                            count2++;
+                        }
 
                         String session_id = null;
                         if (!StringUtil.isEmpty(putLogReq.getSid()))
@@ -112,10 +123,6 @@ public class ExportData
                         String network_type = null;
                         if (!StringUtil.isEmpty(putLogReq.getNt()))
                             network_type = putLogReq.getNt();
-
-/*                        String visit_from = null;
-                        if (!StringUtil.isEmpty(putLogReq.getVf()))
-                            visit_from = putLogReq.getVf();*/
                         
                         String visit_from = null;
                         if (!StringUtil.isEmpty(putLogReq.getVf()))
@@ -183,7 +190,6 @@ public class ExportData
                                     logbean.setDisplay_solution(display_solution);
                                     logbean.setEvent_type(ue.getEt());
                                     logbean.setEvent_name(ue.getEn());
-                                    /*logbean.setVisit_resouce(ue.getVr());*/
                                     logbean.setVisit_resouce(decodeURL(ue.getVr()));
                                     
                                     if (ue.getEt().equals("1"))
@@ -381,6 +387,8 @@ public class ExportData
             changeFile(sourcePath, destPath);
             file2Hive(yestedayDate2);
             logger.info("========================over=============================");
+            logger.info("==============================cookiedSet size: "+cookiedSet.size());
+            logger.info("==============================count2 size: "+count2);
         }
         catch (Exception e)
         {
