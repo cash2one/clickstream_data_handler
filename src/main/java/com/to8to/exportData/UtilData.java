@@ -10,6 +10,7 @@ import java.net.URI;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
@@ -68,6 +69,11 @@ public class UtilData
     
     public static void main(String[] args)
     {
-        getTime();
+        /*getTime();*/
+        String parent_id = "141370775754295150";
+        parent_id = parent_id + "-" + "876ec82cc17ba6b4d8b12232eb681eea";
+        parent_id = DigestUtils.md5Hex(parent_id);
+        System.out.println(parent_id);
+        
     }
 }

@@ -156,9 +156,7 @@ public class ExportData
                                 if (ue.getEt().equals("1"))
                                 {
                                     parent_id = ue.getCi();
-                                    parent_id = parent_id + "-" + cookie_id
-                                            + "-" + session_id
-                                            + System.currentTimeMillis();
+                                    parent_id = parent_id + "-" + cookie_id;
                                     parent_id = DigestUtils.md5Hex(parent_id);
                                 }
                             }
