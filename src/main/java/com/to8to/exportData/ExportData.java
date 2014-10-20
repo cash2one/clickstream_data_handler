@@ -202,11 +202,8 @@ public class ExportData
                                         {
                                             current_id = ue.getCi();
                                         }
-                                        current_id = current_id + "-"
-                                                + cookie_id + "-" + session_id
-                                                + System.currentTimeMillis();
-                                        current_id = DigestUtils
-                                                .md5Hex(current_id);
+                                        current_id = current_id + "-"+ cookie_id + "-" + session_id+ System.currentTimeMillis();
+                                        current_id = DigestUtils.md5Hex(current_id);
                                         logbean.setCurrent_id(current_id);
                                         logbean.setParent_id(parent_id);
                                     }
