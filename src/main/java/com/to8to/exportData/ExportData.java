@@ -16,6 +16,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
@@ -33,6 +35,7 @@ public class ExportData
     public static Logger logger = LoggerFactory.getLogger(ExportData.class);
     public static HashSet<String> cookiedSet = new HashSet<String>(); 
     public static int count2 = 0;
+    
 
     public static void changeFile(String source, String dest)
     {
@@ -80,7 +83,6 @@ public class ExportData
                         }
                         else
                         {
-                            cookie_id = System.currentTimeMillis()+"";
                             count2++;
                         }
 
@@ -220,35 +222,6 @@ public class ExportData
                                 }
                             }
                         }
-                        else
-                        {
-                            LogBean logbean = new LogBean();
-                            logbean.setLeave_time(leave_time);
-                            logbean.setUser_id(user_id);
-                            logbean.setCookie_id(cookie_id);
-                            logbean.setSession_id(session_id);
-                            logbean.setUser_location(user_location);
-                            logbean.setIp_address(ip_adress);
-                            logbean.setOs_version(os_version);
-                            logbean.setOs_type(os_type);
-                            logbean.setProduct_name(productName);
-                            logbean.setProduct_version(product_version);
-                            logbean.setUser_agent(user_agent);
-                            logbean.setSp_type(sp_type);
-                            logbean.setNetwork_type(network_type);
-                            logbean.setVisit_from(visit_from);
-                            logbean.setDevice_type(device_type);
-                            logbean.setDevice_id(device_id);
-                            logbean.setDisplay_solution(display_solution);
-                            parent_id = parent_id + "-" + cookie_id + "-"
-                                    + session_id + System.currentTimeMillis();
-                            parent_id = DigestUtils.md5Hex(parent_id);
-                            logbean.setParent_id(parent_id);
-                            writer.write(logbean.toString() + "\n");
-                            writer.flush();
-                            logger.info("=====================================write a message: "+logbean.toString());
-                            logger.info("=============================================count: "+count);
-                        }
                     }
                 }
                 writer.close();
@@ -292,12 +265,15 @@ public class ExportData
     
     public static String decodeURL(String url)
     {
+        
         String stirngurl = url;
+        
         if (!StringUtil.isEmpty(url))
         {
             stirngurl = ("http://" + url).toLowerCase();
             try
             {
+                
                 if (url.indexOf("utf-8") != -1 || url.indexOf("utf8") != -1)
                 {
                     stirngurl = URLDecoder.decode(stirngurl, "utf-8");
@@ -317,14 +293,59 @@ public class ExportData
                         stirngurl = (java.net.URLDecoder.decode(stirngurl,
                                 "gbk"));
                     }
-                    else if(stirngurl.indexOf("cpro.baidu.com")!=-1)
+                    else if(stirngurl.indexOf("baidu.com") != -1)
                     {
-                        stirngurl = (java.net.URLDecoder.decode(stirngurl,
-                                "gbk"));
+                        String word = getStrings(stirngurl);
+                        if (word != null)
+                        {
+
+                            if (word.indexOf("%e") != -1)
+                            {
+                                try
+                                {
+                                    stirngurl = (java.net.URLDecoder.decode(
+                                            stirngurl, "UTF-8"));
+                                }
+                                catch(UnsupportedEncodingException ue)
+                                {
+                                    ue.printStackTrace();
+                                    try
+                                    {
+                                        stirngurl = (java.net.URLDecoder.decode(
+                                                stirngurl, "GB2312"));
+                                    }
+                                    catch(UnsupportedEncodingException ue2)
+                                    {
+                                        ue2.printStackTrace();
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                try
+                                {
+                                    stirngurl = (java.net.URLDecoder.decode(
+                                            stirngurl, "GB2312"));
+                                }
+                                catch(UnsupportedEncodingException ue3)
+                                {
+                                    ue3.printStackTrace();
+                                    try
+                                    {
+                                        stirngurl = (java.net.URLDecoder.decode(
+                                                stirngurl, "UTF-8"));
+                                    }
+                                    catch(UnsupportedEncodingException ue4)
+                                    {
+                                        ue4.printStackTrace();
+                                    }
+                                }
+
+                            }
+                        }
                     }
                     else if (stirngurl.indexOf("image.so") != -1
                             || stirngurl.indexOf("so.com") != -1
-                            || stirngurl.indexOf("baidu.com") != -1
                             || stirngurl.indexOf("to8to.com") != -1)
                     {
                         stirngurl = (java.net.URLDecoder.decode(stirngurl,
@@ -335,19 +356,39 @@ public class ExportData
             catch (Exception e)
             {
                 e.printStackTrace();
-                logger.error(e.getMessage(), e);
-                logger.error("decode url is: "+stirngurl);
                 return stirngurl;
             }
             return stirngurl;
         }
         return stirngurl;
     }
+    
+    private static String getStrings(String str)
+    {
+        if(str.indexOf("wd")!=-1)
+        {
+            Pattern p = Pattern.compile("&wd=(.*?)&");
+            Matcher m = p.matcher(str);
+            if (m.find())
+            {
+                return m.group(1).toString();
+            }
+        }
+        else if(str.indexOf("word")!=-1)
+        {
+            Pattern p = Pattern.compile("&word=(.*?)&");
+            Matcher m = p.matcher(str);
+            if (m.find())
+            {
+                return m.group(1).toString();
+            } 
+        }
+        return null;
+    }
 
 
     public static void main(String[] args)
     {
-
         try
         {
             logger.info("=============================begin=============================");

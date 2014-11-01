@@ -26,15 +26,15 @@ public class UtilData
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, 2014);
         cal.set(Calendar.MONTH, Calendar.OCTOBER);
-        cal.set(Calendar.DATE, 16);
-        cal.set(Calendar.HOUR_OF_DAY, 21);
+        cal.set(Calendar.DATE, 28);
+        cal.set(Calendar.HOUR_OF_DAY, 24);
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MINUTE, 0);
         cal.set(Calendar.MILLISECOND, 0);
         System.out.println(cal.getTimeInMillis());
         cal.set(Calendar.YEAR, 2014);
         cal.set(Calendar.MONTH, Calendar.OCTOBER);
-        cal.set(Calendar.DATE, 16);
+        cal.set(Calendar.DATE, 28);
         cal.set(Calendar.HOUR_OF_DAY, 0);
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MINUTE, 0);
@@ -69,11 +69,7 @@ public class UtilData
     
     public static void main(String[] args)
     {
-        /*getTime();*/
-        String parent_id = "141370775754295150";
-        parent_id = parent_id + "-" + "876ec82cc17ba6b4d8b12232eb681eea";
-        parent_id = DigestUtils.md5Hex(parent_id);
-        System.out.println(parent_id);
+        getTime();
         
     }
 }
