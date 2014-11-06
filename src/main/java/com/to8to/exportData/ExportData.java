@@ -71,11 +71,11 @@ public class ExportData
 
                     if (putLogReq != null)
                     {
-                        String user_id = null;
+                        String user_id = "";
                         if (!StringUtil.isEmpty(putLogReq.getUid()))
                             user_id = putLogReq.getUid();
 
-                        String cookie_id = null;
+                        String cookie_id = "";
                         if (!StringUtil.isEmpty(putLogReq.getCid()))
                         {
                             cookie_id = putLogReq.getCid();
@@ -86,69 +86,69 @@ public class ExportData
                             count2++;
                         }
 
-                        String session_id = null;
+                        String session_id = "";
                         if (!StringUtil.isEmpty(putLogReq.getSid()))
                             session_id = putLogReq.getSid();
 
-                        String user_location = null;
+                        String user_location = "";
                         if (!StringUtil.isEmpty(putLogReq.getUl()))
                             user_location = putLogReq.getUl();
 
-                        String ip_adress = null;
+                        String ip_adress = "";
                         if (!StringUtil.isEmpty(putLogReq.getIp()))
                             ip_adress = putLogReq.getIp();
 
-                        String os_version = null;
+                        String os_version = "";
                         if (!StringUtil.isEmpty(putLogReq.getOsv()))
                             os_version = putLogReq.getOsv();
 
-                        String os_type = null;
+                        String os_type = "";
                         if (!StringUtil.isEmpty(putLogReq.getOst()))
                             os_type = putLogReq.getOst();
 
-                        String productName = null;
+                        String productName = "";
                         if (!StringUtil.isEmpty(putLogReq.getPn()))
                             productName = putLogReq.getPn();
 
-                        String product_version = null;
+                        String product_version = "";
                         if (!StringUtil.isEmpty(putLogReq.getPv()))
                             product_version = putLogReq.getPv();
 
-                        String user_agent = null;
+                        String user_agent = "";
                         if (!StringUtil.isEmpty(putLogReq.getUa()))
                             user_agent = putLogReq.getUa();
 
-                        String sp_type = null;
+                        String sp_type = "";
                         if (!StringUtil.isEmpty(putLogReq.getSt()))
                             sp_type = putLogReq.getSt();
 
-                        String network_type = null;
+                        String network_type = "";
                         if (!StringUtil.isEmpty(putLogReq.getNt()))
                             network_type = putLogReq.getNt();
                         
-                        String visit_from = null;
+                        String visit_from = "";
                         if (!StringUtil.isEmpty(putLogReq.getVf()))
                             visit_from = decodeURL(putLogReq.getVf());
 
-                        String device_type = null;
+                        String device_type = "";
                         if (!StringUtil.isEmpty(putLogReq.getDt()))
                             device_type = putLogReq.getDt();
 
-                        String device_id = null;
+                        String device_id = "";
                         if (!StringUtil.isEmpty(putLogReq.getDi()))
                             device_id = putLogReq.getDi();
 
-                        String display_solution = null;
+                        String display_solution = "";
                         if (!StringUtil.isEmpty(putLogReq.getDs()))
                             display_solution = putLogReq.getDs();
 
-                        String leave_time = null;
+                        String leave_time = "";
                         if (!StringUtil.isEmpty(putLogReq.getLt()))
                             leave_time = putLogReq.getLt();
 
                         List<UserEvent> e = putLogReq.getE();
                         int size = e.size();
-                        String parent_id = null;
+                        String parent_id = "";
 
                         if (size > 0)
                         {
