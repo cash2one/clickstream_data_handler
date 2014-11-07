@@ -48,6 +48,8 @@ public class PutLogReq
 
     public String getUid()
     {
+        if(uid.equals("")||uid==null)
+            uid="";
         return uid;
     }
 
@@ -58,6 +60,8 @@ public class PutLogReq
 
     public String getCid()
     {
+        if(cid.equals("")||cid==null)
+            cid="";
         return cid;
     }
 
@@ -68,6 +72,8 @@ public class PutLogReq
 
     public String getSid()
     {
+        if(sid.equals("")||sid==null)
+            sid="";
         return sid;
     }
 
@@ -78,6 +84,8 @@ public class PutLogReq
 
     public String getUl()
     {
+        if(ul.equals("")||ul==null)
+            ul="";
         return ul;
     }
 
@@ -88,6 +96,8 @@ public class PutLogReq
 
     public String getIp()
     {
+        if(ip.equals("")||ip==null)
+            ip="";
         return ip;
     }
 
@@ -98,6 +108,8 @@ public class PutLogReq
 
     public String getOsv()
     {
+        if(osv.equals("")||osv==null)
+            osv="";
         return osv;
     }
 
@@ -108,6 +120,8 @@ public class PutLogReq
 
     public String getOst()
     {
+        if(ost.equals("")||ost==null)
+            ost="";
         return ost;
     }
 
@@ -118,6 +132,8 @@ public class PutLogReq
 
     public String getPn()
     {
+        if(pn.equals("")||pn==null)
+            pn="";
         return pn;
     }
 
@@ -128,6 +144,8 @@ public class PutLogReq
 
     public String getPv()
     {
+        if(pv.equals("")||pv==null)
+            pv="";
         return pv;
     }
 
@@ -138,6 +156,8 @@ public class PutLogReq
 
     public String getUa()
     {
+        if(ua.equals("")||ua==null)
+            ua="";
         return ua;
     }
 
@@ -148,6 +168,8 @@ public class PutLogReq
 
     public String getEv()
     {
+        if(ev.equals("")||ev==null)
+            ev="";
         return ev;
     }
 
@@ -158,6 +180,8 @@ public class PutLogReq
 
     public String getSt()
     {
+        if(st.equals("")||st==null)
+            st="";
         return st;
     }
 
@@ -168,6 +192,8 @@ public class PutLogReq
 
     public String getNt()
     {
+        if(nt.equals("")||nt==null)
+            nt="";
         return nt;
     }
 
@@ -178,6 +204,8 @@ public class PutLogReq
 
     public String getDt()
     {
+        if(dt.equals("")||dt==null)
+            dt="";
         return dt;
     }
 
@@ -188,6 +216,8 @@ public class PutLogReq
 
     public String getDi()
     {
+        if(di.equals("")||di==null)
+            di="";
         return di;
     }
 
@@ -198,6 +228,8 @@ public class PutLogReq
 
     public String getDs()
     {
+        if(ds.equals("")||ds==null)
+            ds="";
         return ds;
     }
 
@@ -208,6 +240,8 @@ public class PutLogReq
 
     public String getLt()
     {
+        if(lt.equals("")||lt==null)
+            lt="";
         return lt;
     }
 
@@ -218,6 +252,8 @@ public class PutLogReq
 
     public String getVf()
     {
+        if(vf.equals("")||vf==null)
+            vf="";
         return vf;
     }
 

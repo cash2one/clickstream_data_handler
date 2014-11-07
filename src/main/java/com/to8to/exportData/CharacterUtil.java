@@ -221,6 +221,7 @@ public class CharacterUtil
             String parentId)
     {
         LogBean logbean = new LogBean();
+        
         logbean.setUser_id(putLogReq.getUid());
         logbean.setLeave_time(putLogReq.getLt());
         logbean.setVisit_time(ue.getVt());
@@ -240,6 +241,7 @@ public class CharacterUtil
         logbean.setDisplay_solution(putLogReq.getDs());
         logbean.setEvent_type(ue.getEt());
         logbean.setEvent_name(ue.getEn());
+        
         try
         {
             

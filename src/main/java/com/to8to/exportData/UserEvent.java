@@ -10,6 +10,8 @@ public class UserEvent
 
     public String getVt()
     {
+        if(vt.equals("")||vt==null)
+            vt="";
         return vt;
     }
 
@@ -20,6 +22,8 @@ public class UserEvent
 
     public String getEt()
     {
+        if(et.equals("")||et==null)
+            et="";
         return et;
     }
 
@@ -30,6 +34,8 @@ public class UserEvent
 
     public String getEn()
     {
+        if(en.equals("")||en==null)
+            en="";
         return en;
     }
 
@@ -40,6 +46,8 @@ public class UserEvent
 
     public String getVr()
     {
+        if(vr.equals("")||vr==null)
+            vr="";
         return vr;
     }
 
@@ -50,6 +58,8 @@ public class UserEvent
 
     public String getCi()
     {
+        if(ci.equals("")||ci==null)
+            ci="";
         return ci;
     }
 
