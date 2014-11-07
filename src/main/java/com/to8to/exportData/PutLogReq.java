@@ -5,24 +5,24 @@ import java.util.List;
 public class PutLogReq
 {
     public Oid             _id;
-    public String          uid;
-    public String          cid;
-    public String          sid;
-    public String          ul;
-    public String          ip;
-    public String          osv;
-    public String          ost;
-    public String          pn;
-    public String          pv;
-    public String          ua;
-    public String          ev;
-    public String          st;
-    public String          nt;
-    public String          dt;
-    public String          di;
-    public String          ds;
-    public String          lt;
-    public String          vf;
+    public String          uid="";
+    public String          cid="";
+    public String          sid="";
+    public String          ul="";
+    public String          ip="";
+    public String          osv="";
+    public String          ost="";
+    public String          pn="";
+    public String          pv="";
+    public String          ua="";
+    public String          ev="";
+    public String          st="";
+    public String          nt="";
+    public String          dt="";
+    public String          di="";
+    public String          ds="";
+    public String          lt="";
+    public String          vf="";
     public List<UserEvent> e;
 
     public class Oid

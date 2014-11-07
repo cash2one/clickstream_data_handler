@@ -2,11 +2,11 @@ package com.to8to.exportData;
 
 public class UserEvent
 {
-    public String vt;
-    public String  et;
-    public String en;
-    public String vr;
-    public String ci;
+    public String vt="";
+    public String  et="";
+    public String en="";
+    public String vr="";
+    public String ci="";
 
     public String getVt()
     {

@@ -3,30 +3,30 @@ package com.to8to.exportData;
 public class LogBean
 {
     
-    public String user_id;
-    public String cookie_id;
-    public String session_id;
-    public String user_location;
-    public String ip_address;
-    public String os_version;
-    public String os_type;
-    public String product_name;
-    public String product_version;
-    public String user_agent;
-    public String explorer_version;
-    public String sp_type;
-    public String network_type;
-    public String visit_time;
-    public String leave_time;
-    public String event_type;
-    public String event_name;
-    public String visit_from;
-    public String visit_resouce;
-    public String device_type;
-    public String device_id;
-    public String display_solution;
-    public String parent_id;
-    public String current_id;
+    public String user_id="";
+    public String cookie_id="";
+    public String session_id="";
+    public String user_location="";
+    public String ip_address="";
+    public String os_version="";
+    public String os_type="";
+    public String product_name="";
+    public String product_version="";
+    public String user_agent="";
+    public String explorer_version="";
+    public String sp_type="";
+    public String network_type="";
+    public String visit_time="";
+    public String leave_time="";
+    public String event_type="";
+    public String event_name="";
+    public String visit_from="";
+    public String visit_resouce="";
+    public String device_type="";
+    public String device_id="";
+    public String display_solution="";
+    public String parent_id="";
+    public String current_id="";
 
     @Override
     public String toString()
