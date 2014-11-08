@@ -145,43 +145,12 @@ public class CharacterUtil
 
     private static String getStrings(String str)
     {
-        if (str.indexOf("wd") != -1)
+        Pattern p = Pattern.compile("(&|\\?)(word|wd)=(.*)&?");
+        Matcher m = p.matcher(str);
+        if (m.find())
         {
-            Pattern p = Pattern.compile("&wd=(.*?)&");
-            Matcher m = p.matcher(str);
-            if (m.find())
-            {
-                System.out.println(m.group(1).toString());
-                return m.group(1).toString();
-            }
-            
-            Pattern p2 = Pattern.compile("\\?wd=(.*?)&");
-            Matcher m2 = p2.matcher(str);
-            if (m2.find())
-            {
-                System.out.println(m2.group(1).toString());
-                return m2.group(1).toString();
-            }
-            
-        }
-        else if (str.indexOf("word") != -1)
-        {
-            
-            Pattern p = Pattern.compile("&word=(.*?)&");
-            Matcher m = p.matcher(str);
-            if (m.find())
-            {
-                System.out.println(m.group(1).toString());
-                return m.group(1).toString();
-            }
-            
-            Pattern p2 = Pattern.compile("\\?word=(.*?)&");
-            Matcher m2 = p2.matcher(str);
-            if (m2.find())
-            {
-                System.out.println(m2.group(1).toString());
-                return m2.group(1).toString();
-            }
+            System.out.println(m.group(3).toString());
+            return m.group(3).toString();
         }
         return null;
     }
@@ -278,7 +247,7 @@ public class CharacterUtil
     
     public static void main(String[] args)
     {
-        String url = "http://m.baidu.com/from=1776a/s?word=%e4%b8%9c%e5%8d%97%e4%ba%9a%e5%8e%95%e6%89%80%e9%97%a8&ts=6406086&t_kt=211";
+        String url = "m.baidu.com/s?xy=abc&word=%E5%AE%A2%E5%8E%85%E7%AD%92%E7%81%AF%E5%93%AA%E4%B8%AA%E7%89%8C%E5%AD%90&test=abc";
         getDecodeURL(url);
     }
 
