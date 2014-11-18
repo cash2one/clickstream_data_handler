@@ -81,7 +81,7 @@ public class CharacterUtil
                     else if(URL.indexOf("baidu.com") != -1)
                     {
                         String word = getStrings(URL);
-                        if (word != null && word.indexOf("%e") != -1)
+                        if (word != null && word.startsWith("%e") && word.indexOf("%e",3) == 9)
                         {
                             try
                             {
@@ -149,8 +149,15 @@ public class CharacterUtil
         Matcher m = p.matcher(str);
         if (m.find())
         {
-            System.out.println(m.group(3).toString());
-            return m.group(3).toString();
+            String word = m.group(3).toString();
+            if(!word.startsWith("%"))
+            {
+                int fromindex = word.indexOf("%");
+                if(fromindex<0)
+                    fromindex=0;
+                word = word.substring(fromindex, word.length()-1); 
+            }
+            return word;
         }
         return null;
     }
@@ -245,10 +252,9 @@ public class CharacterUtil
         return logbean;
     }
     
-    public static void main(String[] args)
+    public static void main(String[] args) throws UnsupportedEncodingException
     {
-        String url = "m.baidu.com/s?xy=abc&word=%E5%AE%A2%E5%8E%85%E7%AD%92%E7%81%AF%E5%93%AA%E4%B8%AA%E7%89%8C%E5%AD%90&test=abc";
-        getDecodeURL(url);
+        getDecodeURL("http://m.to8to.com/city/index");
     }
-
+    
 }

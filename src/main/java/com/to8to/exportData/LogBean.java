@@ -2,31 +2,31 @@ package com.to8to.exportData;
 
 public class LogBean
 {
-    
-    public String user_id="";
-    public String cookie_id="";
-    public String session_id="";
-    public String user_location="";
-    public String ip_address="";
-    public String os_version="";
-    public String os_type="";
-    public String product_name="";
-    public String product_version="";
-    public String user_agent="";
-    public String explorer_version="";
-    public String sp_type="";
-    public String network_type="";
-    public String visit_time="";
-    public String leave_time="";
-    public String event_type="";
-    public String event_name="";
-    public String visit_from="";
-    public String visit_resouce="";
-    public String device_type="";
-    public String device_id="";
-    public String display_solution="";
-    public String parent_id="";
-    public String current_id="";
+
+    public String  user_id          = "";
+    public String  cookie_id        = "";
+    public String  session_id       = "";
+    public String  user_location    = "";
+    public String  ip_address       = "";
+    public String  os_version       = "";
+    public String  os_type          = "";
+    public String  product_name     = "";
+    public String  product_version  = "";
+    public String  user_agent       = "";
+    public String  explorer_version = "";
+    public Integer sp_type          = 0;
+    public String  network_type     = "";
+    public String  visit_time       = "";
+    public String  leave_time       = "";
+    public String  event_type       = "";
+    public String  event_name       = "";
+    public String  visit_from       = "";
+    public String  visit_resouce    = "";
+    public String  device_type      = "";
+    public String  device_id        = "";
+    public String  display_solution = "";
+    public String  parent_id        = "";
+    public String  current_id       = "";
 
     @Override
     public String toString()
@@ -50,7 +50,7 @@ public class LogBean
             String session_id, String user_location, String ip_address,
             String os_version, String os_type, String product_name,
             String product_version, String user_agent, String explorer_version,
-            String sp_type, String network_type, String visit_time,
+            Integer sp_type, String network_type, String visit_time,
             String leave_time, String event_type, String event_name,
             String visit_from, String visit_resouce, String device_type,
             String device_id, String display_solution, String parent_id,
@@ -94,7 +94,7 @@ public class LogBean
     {
         this.user_id = user_id;
     }
-    
+
     public String getCookie_id()
     {
         return cookie_id;
@@ -195,12 +195,12 @@ public class LogBean
         this.explorer_version = explorer_version;
     }
 
-    public String getSp_type()
+    public Integer getSp_type()
     {
         return sp_type;
     }
 
-    public void setSp_type(String sp_type)
+    public void setSp_type(Integer sp_type)
     {
         this.sp_type = sp_type;
     }

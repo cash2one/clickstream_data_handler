@@ -32,16 +32,16 @@ public class UtilData
     {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, 2014);
-        cal.set(Calendar.MONTH, Calendar.OCTOBER);
-        cal.set(Calendar.DATE, 28);
+        cal.set(Calendar.MONTH, Calendar.SEPTEMBER);
+        cal.set(Calendar.DATE, 1);
         cal.set(Calendar.HOUR_OF_DAY, 24);
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MINUTE, 0);
         cal.set(Calendar.MILLISECOND, 0);
         System.out.println(cal.getTimeInMillis());
         cal.set(Calendar.YEAR, 2014);
-        cal.set(Calendar.MONTH, Calendar.OCTOBER);
-        cal.set(Calendar.DATE, 28);
+        cal.set(Calendar.MONTH, Calendar.SEPTEMBER);
+        cal.set(Calendar.DATE, 1);
         cal.set(Calendar.HOUR_OF_DAY, 0);
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MINUTE, 0);

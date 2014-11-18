@@ -177,12 +177,12 @@
 		<snapshotRepository>
 			<id>nexus-snapshots</id>
 			<name>nexus distribution snapshot repository</name>
-			<url>http://192.168.3.62:8081/nexus/content/repositories/snapshots/</url>
+			<url>http://192.168.3.241:8081/nexus/content/repositories/snapshots/</url>
 		</snapshotRepository>
 		<repository>
 			<id>nexus-releases</id>
 			<name>Internal Releases</name>
-			<url>http://192.168.3.62:8081/nexus/content/repositories/releases/</url>
+			<url>http://192.168.3.241:8081/nexus/content/repositories/releases/</url>
 		</repository>
 	</distributionManagement>
 

@@ -16,7 +16,7 @@ public class PutLogReq
     public String          pv="";
     public String          ua="";
     public String          ev="";
-    public String          st="";
+    public Integer          st=0;
     public String          nt="";
     public String          dt="";
     public String          di="";
@@ -178,14 +178,14 @@ public class PutLogReq
         this.ev = ev;
     }
 
-    public String getSt()
+    public Integer getSt()
     {
-        if(st.equals("")||st==null)
-            st="";
+        if(st==null)
+            st=0;
         return st;
     }
 
-    public void setSt(String st)
+    public void setSt(Integer st)
     {
         this.st = st;
     }
