@@ -145,7 +145,7 @@ public class CharacterUtil
 
     private static String getStrings(String str)
     {
-        Pattern p = Pattern.compile("(&|\\?)(word|wd)=(.*)&?");
+        Pattern p = Pattern.compile("(&|\\?)(word|wd|k)=(.*)&?");
         Matcher m = p.matcher(str);
         if (m.find())
         {
@@ -254,7 +254,7 @@ public class CharacterUtil
     
     public static void main(String[] args) throws UnsupportedEncodingException
     {
-        getDecodeURL("http://m.to8to.com/city/index");
+        getDecodeURL("zhidao.baidu.com/link?url=_Qink4rlxLIB35wamiD5h3t30JKR--Q_t1CNf2YhZAtpkkDYW7PrRlc1V1eC1awJjA1oJZYpVrfARLWibzhoyCYq_4O-KoRUD8Gf-qXRWs3");
     }
     
 }
